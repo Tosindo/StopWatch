@@ -293,6 +293,7 @@
             this.MaximizeBox = false;
             this.Name = "Timer";
             this.Text = "Timer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Timer_FormClosing);
             this.PanelContainer.Panel1.ResumeLayout(false);
             this.PanelContainer.Panel1.PerformLayout();
             this.PanelContainer.Panel2.ResumeLayout(false);

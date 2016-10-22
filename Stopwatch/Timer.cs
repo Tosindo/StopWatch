@@ -15,11 +15,18 @@ namespace Stopwatch
 
         private int _h, _m, _s, _ms = 0;
 
+
         public Timer()
         {
             InitializeComponent();
             this.AllowTransparency = true;
+            trackBar1.Value = (int)(Properties.Settings.Default.Opacity * 100);
+            this.Opacity = Properties.Settings.Default.Opacity;
+            this.TopMost = opt_alwaysontop.Checked = Properties.Settings.Default.AlwaysOnTop;
         }
+
+        
+
 
         private string formatTime()
         {
@@ -44,7 +51,7 @@ namespace Stopwatch
                 this.Width = this.Width - PanelContainer.Panel1.Width;
                 PanelContainer.Panel1Collapsed = true;
             }
-            label6.Location = new Point(((splitContainer1.Panel1.Width - label6.Width) / 2), label6.Location.Y);
+            label6.Location = new Point(((splitContainer1.Panel1.Width - timeLabel.Width) / 2), label6.Location.Y);
             timeLabel.Location = new Point(((splitContainer1.Panel1.Width - timeLabel.Width) / 2), timeLabel.Location.Y);
         }
 
@@ -87,6 +94,23 @@ namespace Stopwatch
             {
                 timer1.Enabled = true;
                 pauseButton.Text = "Pause";
+            }
+        }
+
+        private void Timer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult _close = MessageBox.Show("Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (_close == DialogResult.Yes)
+            {
+                Properties.Settings.Default.Opacity = this.Opacity;
+                Properties.Settings.Default.AlwaysOnTop = this.TopMost;
+                Properties.Settings.Default.Save();
+
+                e.Cancel = false;
+            }
+            else
+            {
+                e.Cancel = true;
             }
         }
 
