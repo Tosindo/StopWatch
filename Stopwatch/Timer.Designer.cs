@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.PanelContainer = new System.Windows.Forms.SplitContainer();
+            this.label5 = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.opt_alwaysontop = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.setTimer = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,14 +46,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.pauseButton = new System.Windows.Forms.Button();
             this.coOptions = new System.Windows.Forms.Button();
-            this.opt_alwaysontop = new System.Windows.Forms.CheckBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.label5 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PanelContainer)).BeginInit();
             this.PanelContainer.Panel1.SuspendLayout();
             this.PanelContainer.Panel2.SuspendLayout();
             this.PanelContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSeconds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMinutes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHours)).BeginInit();
@@ -58,7 +59,6 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // PanelContainer
@@ -93,6 +93,39 @@
             this.PanelContainer.Size = new System.Drawing.Size(443, 223);
             this.PanelContainer.SplitterDistance = 191;
             this.PanelContainer.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(17, 111);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(46, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Opacity:";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.AutoSize = false;
+            this.trackBar1.Location = new System.Drawing.Point(69, 111);
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Minimum = 20;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(106, 20);
+            this.trackBar1.TabIndex = 9;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBar1.Value = 100;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // opt_alwaysontop
+            // 
+            this.opt_alwaysontop.AutoSize = true;
+            this.opt_alwaysontop.Location = new System.Drawing.Point(17, 137);
+            this.opt_alwaysontop.Name = "opt_alwaysontop";
+            this.opt_alwaysontop.Size = new System.Drawing.Size(95, 17);
+            this.opt_alwaysontop.TabIndex = 8;
+            this.opt_alwaysontop.Text = "Always on top.";
+            this.opt_alwaysontop.UseVisualStyleBackColor = true;
+            this.opt_alwaysontop.CheckedChanged += new System.EventHandler(this.opt_alwaysontop_CheckedChanged);
             // 
             // label4
             // 
@@ -225,6 +258,7 @@
             // pauseButton
             // 
             this.pauseButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pauseButton.Enabled = false;
             this.pauseButton.Location = new System.Drawing.Point(0, 0);
             this.pauseButton.Name = "pauseButton";
             this.pauseButton.Size = new System.Drawing.Size(222, 49);
@@ -244,41 +278,9 @@
             this.coOptions.UseVisualStyleBackColor = true;
             this.coOptions.Click += new System.EventHandler(this.coOptions_Click);
             // 
-            // opt_alwaysontop
-            // 
-            this.opt_alwaysontop.AutoSize = true;
-            this.opt_alwaysontop.Location = new System.Drawing.Point(17, 137);
-            this.opt_alwaysontop.Name = "opt_alwaysontop";
-            this.opt_alwaysontop.Size = new System.Drawing.Size(95, 17);
-            this.opt_alwaysontop.TabIndex = 8;
-            this.opt_alwaysontop.Text = "Always on top.";
-            this.opt_alwaysontop.UseVisualStyleBackColor = true;
-            this.opt_alwaysontop.CheckedChanged += new System.EventHandler(this.opt_alwaysontop_CheckedChanged);
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.AutoSize = false;
-            this.trackBar1.Location = new System.Drawing.Point(69, 111);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Minimum = 20;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(106, 20);
-            this.trackBar1.TabIndex = 9;
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar1.Value = 100;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 111);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(46, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Opacity:";
-            // 
             // timer1
             // 
+            this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Timer
@@ -296,6 +298,7 @@
             this.PanelContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PanelContainer)).EndInit();
             this.PanelContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSeconds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMinutes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHours)).EndInit();
@@ -304,7 +307,6 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }
